@@ -12,7 +12,7 @@ Files for the project:
 - `ARC_Logo.png` image file for the poster
 - `FCC_logo.png` image file for the poster
 - `qrcode_www.arc.gov.png` image file for the poster
-- `index_Files` folder of generated files to produce poster preview
+- `HansenPoster_files` folder of generated files to produce poster preview
 
 Project code and output:
 - `HansenPoster.Rmd` code that generates the poster
