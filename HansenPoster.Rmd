@@ -1,0 +1,231 @@
+---
+main_topsize: 0.2 #percent coverage of the poster
+main_bottomsize: 0.1
+#ESSENTIALS
+title: '**Potential politization of newly available broadband consumer benefit.**'
+author:
+  - name: '**Curtis Hansen**'
+    affil: 1
+    main: true
+    email: ch1749a@american.edu
+affiliation:
+  - num: 1
+    address: SIS, American University
+main_findings:
+  - "**Trump** vote share is **negatively correlated** with a new **$30/month subsidy**"
+logoleft_name: ARC_Logo.png #size on this is still messed up :(
+logoright_name: FCC_logo.png
+logocenter_name: qrcode_www.arc.gov.png
+output: 
+  posterdown::posterdown_betterport:
+    self_contained: false
+    pandoc_args: --mathjax
+    number_sections: false
+bibliography: packages.bib
+link-citations: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      tidy = FALSE,
+                      message = FALSE,
+                      fig.align = 'center',
+                      out.width = "100%")
+options(knitr.table.format = "html") 
+
+
+setwd("C:/Users/Cooper/Documents/Assessments/Poster")
+
+library(tidyverse)
+library(stargazer)
+library(patchwork)
+library(vtable)
+
+
+# Load data
+pres = read.csv("countypres_2000-2020.csv") %>% filter(year == "2020", party == "REPUBLICAN")
+stats = read.csv("counties.csv")
+acp = read.csv("US_County_ACP_FEB2023.csv") %>% filter(!is.na(FIPS), !is.na(HHOLDS1620))
+
+# Get Trump share per county
+pres = pres %>% 
+  group_by(county_fips) %>% 
+  summarise(candidatevotes = sum(candidatevotes),
+            totalvotes = max(totalvotes))
+pres$trumpSHARE = pres$candidatevotes/pres$totalvotes
+
+  
+# Prep merge key for each df
+pres$fips = ifelse(nchar(pres$county_fips) == 4, paste0("0", pres$county_fips), pres$county_fips)
+stats$fips = ifelse(nchar(stats$fips) == 4, paste0("0", stats$fips), stats$fips)
+acp$fips = ifelse(nchar(acp$FIPS) == 4, paste0("0", acp$FIPS), acp$FIPS)
+
+stats$schoolAGED = stats$age.0.4+stats$age.5.9+stats$age.10.14+stats$age.15.19
+stats$edu.bachelors. = stats$edu.bachelors./100
+
+# Slim down the variable list (looking at you, stats$)
+stats2 = subset(stats, select = c(fips,schoolAGED,edu.bachelors.))
+acp2 = subset(acp, select = c(fips,HHOLDS1620,ELIGIBLE_HH,ACP_SUBSCRIBERS_2023_02_01))
+pres2 = subset(pres, select = c(fips,trumpSHARE))
+
+acp2$partic23 = acp2$ACP_SUBSCRIBERS_2023_02_01/acp2$ELIGIBLE_HH
+acp2$shareELIGIBLE = acp2$ELIGIBLE_HH/acp2$HHOLDS1620
+
+# Merge merge merge
+join1 = merge(stats2, pres2, by.x = "fips", by.y = "fips")
+join2 = merge(join1, acp2, by.x = "fips", by.y = "fips")
+
+rm(acp, acp2, join1, pres, pres2, stats, stats2)
+
+# CONDUCT ANALYSIS ----
+
+# Summary stats/plots
+
+sumtable = st(join2, vars = c('partic23', 'trumpSHARE', "schoolAGED", "edu.bachelors.","shareELIGIBLE"))
+
+
+# Estimate models
+
+mod1 = lm(partic23 ~ trumpSHARE, join2) #Y~X #Outcome~Exposure
+mod2 = lm(partic23 ~ trumpSHARE + shareELIGIBLE, join2)
+mod3 = lm(partic23 ~ trumpSHARE + shareELIGIBLE + edu.bachelors. + schoolAGED, join2)
+
+# build table
+
+startab = stargazer(mod1, mod2, mod3, type='html', keep.stat = 'N')
+
+#build graphs
+
+p1=
+  ggplot(join2, aes(x = trumpSHARE, y = partic23)) + 
+    geom_point(shape = 21,alpha = 0.3) +
+    geom_smooth(method = "lm") +
+    ylim(0,1) +
+    xlim(0,1) +
+    theme_minimal() +
+    theme(axis.title.x = element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank()) +
+    labs(title = "trumpSHARE") +
+    theme(plot.title = element_text(hjust = 0.5, size = rel(0.9))) 
+
+p2=
+  ggplot(join2, aes(x = shareELIGIBLE, y = partic23)) + 
+    geom_point(shape = 21,alpha = 0.3) +
+    geom_smooth(method = "lm") +
+    ylim(0,1) +
+    xlim(0,1) +
+    theme_minimal() +
+    theme(axis.title.x = element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          axis.title.y = element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank()) +
+    labs(title = "shareELIGIBLE") +
+    theme(plot.title = element_text(hjust = 0.5, size = rel(0.9)))
+
+p3=
+  ggplot(join2, aes(x = edu.bachelors., y = partic23)) + 
+    geom_point(shape = 21, alpha = 0.3) +
+    geom_smooth(method = "lm") +
+    ylim(0,1) +
+    xlim(0,1) +
+    theme_minimal()
+
+p4=
+  ggplot(join2, aes(x = schoolAGED, y = partic23)) + 
+    geom_point(shape = 21,alpha = 0.3) +
+    geom_smooth(method = "lm") +
+    ylim(0,1) +
+    xlim(0,1) +
+    theme_minimal() +
+    theme(axis.title.y = element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank())
+
+```
+
+# Introduction
+
+The Affordable Connectivity Program [ACP](https://www.fcc.gov/acp) is an FCC benefit program that provides $30 per month towards broadband services for eligible homes. A household is eligible for ACP if the household income is at or below 200% of the Federal Poverty Guidelines ($60,000/yr for a family of four). Because this is a new benefit program, participation rates are still low and climbing across the country and this study is focused on determining which factors may contribute to participation rates. This research is important because it can shed light on obstacles towards participation in this program that need to be overcome in order to promote Universal Access and close the digital divide.
+
+```{r, include=FALSE}
+
+
+knitr::write_bib(c('tidyverse','posterdown', 'rmarkdown','pagedown', 'patchwork','vtable','stargazer'), 'packages.bib')
+
+```
+
+## Research question:
+
+- **Hypothesis:** Trump vote share is negatively correlated with ACP participation at the county level.
+- **Expectations:** P-value >0.05 which rejects null hypothesis, after controlling for other variables.
+
+
+# Data
+
+This analysis combined three datasets in order to measure the county-level correlation between ACP participation and the 2020 share of Trump voters while also controlling for potential confounding variables. The datasets used:
+
+### ACP Participation for 1 Feb 2023
+  - Source: Appalachian Regional Commission
+  - Variables of interest:
+    - ACP Subscribers on 1 Feb 2023 `ACP_SUBSCRIBERS_2023_02_01`
+    - ACP Eligible Households: `ELIGIBLE_HH` 
+    
+### U.S. County Presidential Election Outcomes, 2000-2020
+  - Source: [MIT Election Data and Science Lab (MEDSL)](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ)
+  - Variables of interest:
+    - Total votes for candidate: `candidatevotes`
+    - Total votes: `totalvotes` 
+    
+### U.S. County Assorted Statistics
+  - Source: [evangambit](https://github.com/evangambit/JsonOfCounties)
+  - Variables of interest:
+    - % population per age group: `age.0.4` ... `age.15.19`
+    - % population with bachelors degree: `edu.bachelors.`
+    
+These three datasets were filtered down to just the timeframe of interest (2020), candidates of interest (Trump), and cleaned of the small set of counties that had missing data from any of the datasets. The merged dataset includes 3,068 of the 3,143 U.S. Counties.
+
+Further manipulation of the data included combining all age groups inta new variable called `schoolAGED`, which included the total population share between the ages of 0-19. The ACP participation stat `partic23` was also created by dividing the number of ACP subscribers by the total number of eligible households. See Table 1, below, for summary statistics of key variables.
+
+```{r, stattable}
+#trim whitespace
+par(mar=c(2,2,0,0))
+
+sumtable
+```
+    
+# Analysis
+
+I first wanted to understand the relationship between ACP participation and my four variables of interest. See below for a selection of scatterplots with linear regression to show strength and directionality of relationship, Figure \@ref(fig:scatters).
+
+```{r, scatters, fig.cap='Note that the axes are universal and all variables range from 0-1.', out.width="80%"}
+#trim whitespace
+par(mar=c(2,2,0,0))
+
+patchwork = p1+p2+p3+p4
+patchwork + plot_annotation(
+  title = 'Relationship between Predictors and ACP Participation'
+)
+```
+
+This initial view confirmed my suspicions on the direction of the relationship between the share of votes for Trump in a county versus the level of participation in ACP being negative. It also confirmed my understanding of how the other variables would relate to ACP participation (negative for education level due to the complexity of signing up for the benefit, positive for percent of population that is school aged due to the amount of outreach being done by K-12 school systems around this benefit, and positive for % of homes eligible due to the increased likelihood of word of mouth referrals in the community.)
+
+I then conducted a multiple linear regression analysis with ACP participation rate as the dependent variable and Trump Voter share, then ran another model that controlled for the share of eligible population, then ran a final model that also controlled for education level, and share of school-aged population as the independent variables. Here are the results:
+
+```{r, startable, results='asis'}
+  stargazer(mod1, mod2, mod3, type='html', keep.stat = 'N')
+```
+
+# Findings
+The results of the multiple linear regression analysis fail to reject the null hypothesis and suggest that there is a negative relationship between support for Trump (`trumpSHARE`) and participation in the ACP (`partic23`). Specifically, the model suggests that for every percentage point increase in `trumpSHARE`, the percentage of ACP participation decreases by between 0.374 and 0.563, depending on the model. These relationships were all statistically significant.
+
+While the results do not prove causation, they should help inform potential advocacy and outreach organizations on factors to consider as they work to improve participation rates in this important digital equity program.
+
+# Primary Sources
+
+- U.S. Census Bureau. (2018). County Population by Characteristics: 2010-2019.
+- U.S. Department of Agriculture. (2021). Educational attainment for the U.S., States, and counties, 1970-2019.
+- Universal Service Administrative Company. (2023). ACP Enrollment and Claims Tracker.

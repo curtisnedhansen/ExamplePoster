@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>Potential politization of newly available broadband consumer benefit.</title>
+
+
+<script src="HansenPoster_files/kePrint-0.0.1/kePrint.js"></script>
+<link href="HansenPoster_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+
+
+<!--
+Font-awesome icons ie github or twitter
+-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+
+<!--
+Google fonts api stuff
+-->
+<link href='https://fonts.googleapis.com/css?family=Special Elite' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Rasa' rel='stylesheet'>
+
+<!--
+Here are the required style attributes for css to make this poster work :)
+-->
+<style>
+@page {
+size: 36in 48in;
+margin: 0;
+padding: 0;
+}
+body {
+margin: 0px;
+padding: 0px;
+width: 36in;
+height: 48in;
+text-align: justify;
+font-size: 45px;
+line-height: 1.05;
+}
+/* RMarkdown Class Styles */
+/* center align leaflet map,
+from https://stackoverflow.com/questions/52112119/center-leaflet-in-a-rmarkdown-document */
+.html-widget {
+margin: auto;
+position: sticky;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
+.leaflet.html-widget.html-widget-static-bound.leaflet-container.leaflet-touch.leaflet-fade-anim.leaflet-grab.leaflet-touch-drag.leaflet-touch-zoom {
+position: sticky;
+width: 100%;
+}
+pre.sourceCode.r {
+background-color: #dddddd40;
+border-radius: 4mm;
+padding: 4mm;
+width: 75%;
+margin: auto;
+margin-top: 1em;
+margin-bottom: 1em;
+/* align-items: center; */
+}
+code.sourceCode.r{
+background-color: transparent;
+font-size: 20pt;
+border-radius: 2mm;
+}
+code {
+font-size: 25pt;
+font-family: monospace;
+background-color: #00808024;
+color: #0b4545;
+padding: 1.2mm;
+line-height: 1;
+border-radius: 2mm;
+}
+caption {
+margin-bottom: 10px;
+font-size: 20pt;
+font-style: italic;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #00808020;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+  border-spacing: 0;
+  font-size: 40%;
+  border-style: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 1em;
+  padding-left: 1em;
+  line-height: 1em;
+}
+table {
+  margin: auto;
+}
+th {
+  padding-left: 5mm;
+  padding-right: 5mm;
+}
+.caption {
+font-size: 20pt;
+font-style: italic;
+padding-top: 0;
+}
+.references {
+font-size: 20px;
+line-height: 90%;
+}
+/* Create three unequal columns that floats next to each other */
+.column {
+float: left;
+padding: 0px;
+}
+.outer {
+width: 36in;
+height: calc(48in *  (1 - 0.2 - 0.1 - 0.01) );
+-webkit-column-count: 3; /* Chrome, Safari, Opera */
+-moz-column-count: 3; /* Firefox */
+column-count: 3;
+-webkit-column-fill: auto;
+-moz-column-fill: auto;
+column-fill: auto;
+column-gap: 0;
+padding-left: 0cm;
+padding-right: 0cm;
+/* -webkit-column-rule-width: 50%;
+-moz-column-rule-width: 50%;
+column-rule-width: 50%; */
+-webkit-column-rule-style: none;
+-moz-column-rule-style: none;
+column-rule-style: none;
+-webkit-column-rule-color: black;
+-moz-column-rule-color: black;
+column-rule-color: black;
+background-color: #ffffff;
+font-family: Rasa;
+margin-top: calc(48in *  0.2 );
+padding-top: 1em;
+padding-bottom: 1em;
+}
+span.citation {
+  color: #008080;
+  font-weight: bold;
+}
+a {
+text-decoration: none;
+color: #008080;
+}
+#title {
+font-size: 125pt;
+text-align: left;
+margin: 0;
+line-height: 98%;
+border-bottom: 0;
+font-weight: normal;
+background: 0;
+}
+#author {
+color: #0b4545;
+margin: 0;
+line-height: 85%;
+font-size: 1.17em;
+}
+#affiliation {
+padding-top: 0.1em;
+color: ;
+font-style: italic;
+font-size: 25px;
+margin: 0;
+}
+sup {
+color: #cc0000;
+}
+.affiliation sup {
+font-size: 20px;
+}
+.author {
+text-align: left;
+}
+.author sup {
+font-size: 30px;
+}
+.author_extra {
+color: #008080;
+margin: 0;
+line-height: 85%;
+font-size: 35px;
+text-align: left;
+}
+.outer h1, h2, h3, h4, h5, h6 {
+text-align: center;
+margin: 0;
+font-weight: bold;
+}
+.section h1 {
+  text-align:center;
+  padding-bottom:5px;
+  background:
+    linear-gradient(
+      to left,
+      #ffffff 1%,
+      #ffffff 20%,
+      #0b454575 33%,
+      #0b4545 50%,
+      #0b454575 66%,
+      #ffffff 80%,
+      #ffffff 99%
+    )
+    left
+    bottom
+    #ffffff
+    no-repeat;
+  background-size:100% 5px ;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.outer h2 {
+text-align: center;
+}
+.outer p, .level2 {
+color: #000000;
+}
+.outer ol {
+padding-left: 8%;
+padding-right: 8%;
+text-align: left;
+}
+.main {
+width: 36in;
+height: calc(48in * 0.2);
+position: absolute;
+background-color: #0b4545;
+color: #ffffff90;
+font-family: Special Elite;
+background-image: linear-gradient(#0b4545 50%,#008080);
+}
+.main strong {
+color: #ffffff;
+}
+.main strong > sup {
+color: #ffffff;
+}
+.main sup {
+color: #ffffff90;
+}
+#main-img-left {
+width: 10%;
+left: 0.5in;
+bottom: 0.2in;
+position: absolute;
+}
+#main-img-center {
+width: 10%;
+left: calc(36in * 0.45);
+bottom: 0.5in;
+position: absolute;
+}
+#main-img-right {
+width: 10%;
+right: 0.5in;
+bottom: 0.2in;
+position: absolute;
+}
+.main p {
+font-size: 150px;
+font-family: Special Elite;
+text-align: center;
+margin: 0;
+position: absolute;
+top: 50%;
+-ms-transform: translateY(-50%);
+transform: translateY(-50%);
+margin-left: 1em;
+}
+.fab {
+color: #00000030;
+font-size: 25px;
+}
+.twitter, i {
+color: #00000030;
+font-size: 35px;
+text-decoration: none;
+}
+a.email {
+text-decoration: none;
+color: #00000030;
+font-size: 35px;
+}
+.envelope {
+color: #00000030;
+font-size: 5px;
+text-decoration: none;
+}
+.poster_wrap {
+width: 36in;
+height: 48in;
+padding: 0cm;
+}
+.main_bottom {
+width: 36in;
+height: calc(48in * 0.1);
+margin-top: calc(48in * (1 - 0.1));
+position: absolute;
+background-color: #0b4545;
+background-image: linear-gradient(#008080 10%, #0b4545);
+}
+.section {
+  padding-left: 10mm;
+  padding-right: 10mm;
+}
+span > #tab:mytable {
+  font-weight: bold;
+}
+.orcid img {
+  width: 3%;
+}
+.emphasis {
+  background-color: #008080;
+  color: #ffffff;
+  border: solid #0b2045 3mm;
+  margin: 1em;
+  padding-left: 0;
+  padding-right: 0;
+}
+.emphasis h1 {
+  font-weight: bold;
+  background: none;
+  background-color: #0b2045;
+  padding-bottom: 5mm;
+  padding-top: 1mm;
+  margin-top: -1mm;
+  margin-right: -1mm;
+  margin-left: -1mm;
+}
+.emphasis blockquote {
+  border: 0;
+}
+.emphasis ol {
+  padding: 0;
+  padding-left: 8%;
+  font-size: 100%;
+  font-weight: bold;
+}
+.emphasis p {
+  color: #ffffff;
+}
+</style>
+</head>
+<body>
+
+
+<div class="poster_wrap">
+
+<div class="column outer">
+<div class="section">
+<h1 id="title"><strong>Potential politization of newly available broadband consumer benefit.</strong></h1><br>
+<h3 id="author" class="author">
+
+<strong>Curtis Hansen</strong><sup> 1</sup><br>
+
+<a class='envelope'><i class="fas fa-envelope"></i></a> <a href="mailto:ch1749a@american.edu" class="email">ch1749a@american.edu</a> <br>
+</h3>
+
+<h5 id="author_extra", class="author_extra">
+</h5>
+
+
+<p id="affiliation" class="affiliation">
+<sup>1</sup> SIS, American University
+</p>
+</div>
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The Affordable Connectivity Program <a href="https://www.fcc.gov/acp">ACP</a> is an FCC benefit program that provides $30 per month towards broadband services for eligible homes. A household is eligible for ACP if the household income is at or below 200% of the Federal Poverty Guidelines ($60,000/yr for a family of four). Because this is a new benefit program, participation rates are still low and climbing across the country and this study is focused on determining which factors may contribute to participation rates. This research is important because it can shed light on obstacles towards participation in this program that need to be overcome in order to promote Universal Access and close the digital divide.</p>
+<div id="research-question" class="section level2">
+<h2>Research question:</h2>
+<ul>
+<li><strong>Hypothesis:</strong> Trump vote share is negatively correlated with ACP participation at the county level.</li>
+<li><strong>Expectations:</strong> P-value &gt;0.05 which rejects null hypothesis, after controlling for other variables.</li>
+</ul>
+</div>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>This analysis combined three datasets in order to measure the county-level correlation between ACP participation and the 2020 share of Trump voters while also controlling for potential confounding variables. The datasets used:</p>
+<div id="acp-participation-for-1-feb-2023" class="section level3">
+<h3>ACP Participation for 1 Feb 2023</h3>
+<ul>
+<li>Source: Appalachian Regional Commission</li>
+<li>Variables of interest:
+<ul>
+<li>ACP Subscribers on 1 Feb 2023 <code>ACP_SUBSCRIBERS_2023_02_01</code></li>
+<li>ACP Eligible Households: <code>ELIGIBLE_HH</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="u.s.-county-presidential-election-outcomes-2000-2020" class="section level3">
+<h3>U.S. County Presidential Election Outcomes, 2000-2020</h3>
+<ul>
+<li>Source: <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ">MIT Election Data and Science Lab (MEDSL)</a></li>
+<li>Variables of interest:
+<ul>
+<li>Total votes for candidate: <code>candidatevotes</code></li>
+<li>Total votes: <code>totalvotes</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="u.s.-county-assorted-statistics" class="section level3">
+<h3>U.S. County Assorted Statistics</h3>
+<ul>
+<li>Source: <a href="https://github.com/evangambit/JsonOfCounties">evangambit</a></li>
+<li>Variables of interest:
+<ul>
+<li>% population per age group: <code>age.0.4</code> … <code>age.15.19</code></li>
+<li>% population with bachelors degree: <code>edu.bachelors.</code></li>
+</ul></li>
+</ul>
+<p>These three datasets were filtered down to just the timeframe of interest (2020), candidates of interest (Trump), and cleaned of the small set of counties that had missing data from any of the datasets. The merged dataset includes 3,068 of the 3,143 U.S. Counties.</p>
+<p>Further manipulation of the data included combining all age groups inta new variable called <code>schoolAGED</code>, which included the total population share between the ages of 0-19. The ACP participation stat <code>partic23</code> was also created by dividing the number of ACP subscribers by the total number of eligible households. See Table 1, below, for summary statistics of key variables.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-1">Table 1: </span>Summary Statistics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+N
+</th>
+<th style="text-align:left;">
+Mean
+</th>
+<th style="text-align:left;">
+Std. Dev.
+</th>
+<th style="text-align:left;">
+Min
+</th>
+<th style="text-align:left;">
+Pctl. 25
+</th>
+<th style="text-align:left;">
+Pctl. 75
+</th>
+<th style="text-align:left;">
+Max
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+partic23
+</td>
+<td style="text-align:left;">
+3068
+</td>
+<td style="text-align:left;">
+0.32
+</td>
+<td style="text-align:left;">
+0.17
+</td>
+<td style="text-align:left;">
+0.0036
+</td>
+<td style="text-align:left;">
+0.19
+</td>
+<td style="text-align:left;">
+0.43
+</td>
+<td style="text-align:left;">
+1.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trumpSHARE
+</td>
+<td style="text-align:left;">
+3068
+</td>
+<td style="text-align:left;">
+0.65
+</td>
+<td style="text-align:left;">
+0.16
+</td>
+<td style="text-align:left;">
+0.087
+</td>
+<td style="text-align:left;">
+0.56
+</td>
+<td style="text-align:left;">
+0.77
+</td>
+<td style="text-align:left;">
+0.96
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+schoolAGED
+</td>
+<td style="text-align:left;">
+3068
+</td>
+<td style="text-align:left;">
+0.24
+</td>
+<td style="text-align:left;">
+0.036
+</td>
+<td style="text-align:left;">
+0.078
+</td>
+<td style="text-align:left;">
+0.22
+</td>
+<td style="text-align:left;">
+0.26
+</td>
+<td style="text-align:left;">
+0.45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+edu.bachelors.
+</td>
+<td style="text-align:left;">
+3068
+</td>
+<td style="text-align:left;">
+0.22
+</td>
+<td style="text-align:left;">
+0.095
+</td>
+<td style="text-align:left;">
+0.01
+</td>
+<td style="text-align:left;">
+0.15
+</td>
+<td style="text-align:left;">
+0.26
+</td>
+<td style="text-align:left;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+shareELIGIBLE
+</td>
+<td style="text-align:left;">
+3068
+</td>
+<td style="text-align:left;">
+0.35
+</td>
+<td style="text-align:left;">
+0.098
+</td>
+<td style="text-align:left;">
+0.083
+</td>
+<td style="text-align:left;">
+0.28
+</td>
+<td style="text-align:left;">
+0.41
+</td>
+<td style="text-align:left;">
+0.77
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="analysis" class="section level1">
+<h1>Analysis</h1>
+<p>I first wanted to understand the relationship between ACP participation and my four variables of interest. See below for a selection of scatterplots with linear regression to show strength and directionality of relationship, Figure <a href="#fig:scatters">1</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:scatters"></span>
+<img src="HansenPoster_files/figure-html/scatters-1.png" alt="Note that the axes are universal and all variables range from 0-1." width="80%" />
+<p class="caption">
+Figure 1: Note that the axes are universal and all variables range from 0-1.
+</p>
+</div>
+<p>This initial view confirmed my suspicions on the direction of the relationship between the share of votes for Trump in a county versus the level of participation in ACP being negative. It also confirmed my understanding of how the other variables would relate to ACP participation (negative for education level due to the complexity of signing up for the benefit, positive for percent of population that is school aged due to the amount of outreach being done by K-12 school systems around this benefit, and positive for % of homes eligible due to the increased likelihood of word of mouth referrals in the community.)</p>
+<p>I then conducted a multiple linear regression analysis with ACP participation rate as the dependent variable and Trump Voter share, then ran another model that controlled for the share of eligible population, then ran a final model that also controlled for education level, and share of school-aged population as the independent variables. Here are the results:</p>
+<table style="text-align:center">
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+partic23
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+trumpSHARE
+</td>
+<td>
+-0.374<sup>***</sup>
+</td>
+<td>
+-0.403<sup>***</sup>
+</td>
+<td>
+-0.563<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.018)
+</td>
+<td>
+(0.017)
+</td>
+<td>
+(0.021)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+shareELIGIBLE
+</td>
+<td>
+</td>
+<td>
+0.474<sup>***</sup>
+</td>
+<td>
+0.171<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(0.028)
+</td>
+<td>
+(0.037)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+edu.bachelors.
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-0.544<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.045)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+schoolAGED
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.285<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.076)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+0.561<sup>***</sup>
+</td>
+<td>
+0.416<sup>***</sup>
+</td>
+<td>
+0.674<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.012)
+</td>
+<td>
+(0.014)
+</td>
+<td>
+(0.034)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+3,068
+</td>
+<td>
+3,068
+</td>
+<td>
+3,068
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="3" style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+</div>
+<div id="findings" class="section level1">
+<h1>Findings</h1>
+<p>The results of the multiple linear regression analysis fail to reject the null hypothesis and suggest that there is a negative relationship between support for Trump (<code>trumpSHARE</code>) and participation in the ACP (<code>partic23</code>). Specifically, the model suggests that for every percentage point increase in <code>trumpSHARE</code>, the percentage of ACP participation decreases by between 0.374 and 0.563, depending on the model. These relationships were all statistically significant.</p>
+<p>While the results do not prove causation, they should help inform potential advocacy and outreach organizations on factors to consider as they work to improve participation rates in this important digital equity program.</p>
+</div>
+<div id="primary-sources" class="section level1">
+<h1>Primary Sources</h1>
+<ul>
+<li>U.S. Census Bureau. (2018). County Population by Characteristics: 2010-2019.</li>
+<li>U.S. Department of Agriculture. (2021). Educational attainment for the U.S., States, and counties, 1970-2019.</li>
+<li>Universal Service Administrative Company. (2023). ACP Enrollment and Claims Tracker.</li>
+</ul>
+</div>
+
+</div>
+<div class="main">
+<p><strong>Trump</strong> vote share is <strong>negatively correlated</strong> with a new <strong>$30/month subsidy</strong></p>
+</div>
+<div class="main_bottom">
+<img id="main-img-left" src=ARC_Logo.png>
+<img id="main-img-center" src=qrcode_www.arc.gov.png>
+<img id="main-img-right" src=FCC_logo.png>
+</div>
+</div>
+
+
+
+</body>
+</html>
